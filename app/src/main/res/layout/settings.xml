@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TeacherProfile.Settings"
+    tools:ignore="HardcodedText"
+    android:background="#fff"
+    >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="2dp"
+        android:translationZ="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/SettingsToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#fff"
+
+            >
+
+            <TextView
+
+                android:id="@+id/toolbar_titleSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="sans-serif-medium"
+                android:text="Settings"
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="#000"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="21dp"
+        android:src="@drawable/feedback"
+        app:layout_constraintBottom_toBottomOf="@+id/textView1300"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView1000" />
+
+    <TextView
+        android:id="@+id/textView1000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="21dp"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="16sp"
+        android:textColor="#000"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
+
+    <TextView
+        android:id="@+id/textView1300"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share your feedback about our service"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="21dp"
+        android:textSize="14sp"
+        android:layout_marginTop="2dp"
+        android:textColor="#999999"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView1000" />
+
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1300"
+        android:layout_marginTop="16dp"
+        android:background="#40999999"
+
+        />
+
+    <Button
+        android:id="@+id/feedback"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_marginTop="5dp"
+        android:background="#00000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/appBarLayout"
+
+        />
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="21dp"
+        android:src="@drawable/help"
+        app:layout_constraintBottom_toBottomOf="@+id/textView13000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView10000" />
+
+    <TextView
+        android:id="@+id/textView10000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Help"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="21dp"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#000"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+    <TextView
+        android:id="@+id/textView13000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get help about using Pantomath"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="21dp"
+        android:textSize="14sp"
+        android:layout_marginTop="2dp"
+        android:textColor="#999999"
+        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView10000" />
+
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13000"
+        android:layout_marginTop="16dp"
+        android:background="#40999999"
+
+        />
+
+    <Button
+        android:id="@+id/Help"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_marginTop="5dp"
+        android:background="#00000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4"
+
+        />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About"
+        android:textSize="14sp"
+
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:textColor="#999999"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="21dp"
+        android:src="@drawable/about"
+        app:layout_constraintBottom_toBottomOf="@+id/textView100000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView100000" />
+
+
+    <TextView
+        android:id="@+id/textView100000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About Pantomath"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="21dp"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintStart_toEndOf="@+id/imageView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+
+
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView100000"
+
+        android:layout_marginTop="16dp"
+        android:background="#40999999"
+
+        />
+
+    <Button
+        android:id="@+id/about"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_marginTop="28dp"
+        android:background="#00000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view5"
+
+        />
+
+
+    <TextView
+        android:id="@+id/textView140"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:textSize="14sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:textColor="#999999"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view6" />
+
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="21dp"
+        android:src="@drawable/logout"
+        app:layout_constraintBottom_toBottomOf="@+id/textView1000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView1000000" />
+
+
+    <TextView
+        android:id="@+id/textView1000000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out of Pantomath"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="21dp"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toEndOf="@+id/imageView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView140" />
+
+
+
+
+
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_marginTop="30dp"
+        android:background="#00000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view6"
+
+        />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

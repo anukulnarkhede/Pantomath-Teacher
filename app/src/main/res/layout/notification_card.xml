@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/notification_card_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/doubt_card_bg_physics"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <Button
+            android:id="@+id/StudentTag_Notification"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/subject_button_bg_phy"
+            android:paddingHorizontal="16dp"
+            android:stateListAnimator="@null"
+            android:text="Student Tag"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/timeTextNotification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/NewDoubtTextNotification"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/NewDoubtTextNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif"
+            android:text="Nachiket Nanoty\nhas asked a doubt."
+            android:textAlignment="viewStart"
+            android:textColor="#121212"
+            android:textSize="14sp"
+
+            app:layout_constraintStart_toEndOf="@+id/profilePicStu"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/timeTextNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="sans-serif"
+            android:text="2 min ago"
+            android:textColor="#999999"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@+id/profilePicStu"
+            app:layout_constraintTop_toBottomOf="@+id/NewDoubtTextNotification"
+            tools:ignore="HardcodedText"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <com.jackandphantom.circularimageview.CircleImage
+            android:id="@+id/profilePicStu"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/personal_info"
+            app:layout_constraintBottom_toBottomOf="@+id/timeTextNotification"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/NewDoubtTextNotification" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

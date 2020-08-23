@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".TeacherProfile.TeacherProfileFragment"
+    tools:ignore="HardcodedText"
+    android:overScrollMode="never"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:translationZ="2dp"
+
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/StudentProfileToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="2dp"
+                android:background="#fff">
+
+                <ImageView
+                    android:id="@+id/settingsProfile"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_round_settings_24"
+                    android:layout_gravity="right"
+                    android:layout_marginEnd="12dp"
+                    tools:ignore="RtlHardcoded" />
+
+                <TextView
+
+                    android:id="@+id/toolbar_titleProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Profile"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/view7"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#999999"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ProfilePicture_profile"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/personal_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/editProfilePicture_profile"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_edit_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/ProfilePicture_profile"
+            app:layout_constraintEnd_toEndOf="@+id/ProfilePicture_profile" />
+
+        <TextView
+            android:id="@+id/UserNameProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ProfilePicture_profile"
+            android:textColor="#000000"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="20sp"
+            android:layout_marginTop="16dp"
+            />
+
+        <TextView
+            android:id="@+id/ClassAndBoard_Profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="4dp"
+            android:textColor="#999999"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/UserNameProfile"
+
+            />
+
+        <ProgressBar
+            android:id="@+id/progressBarProfile"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/ProfilePicture_profile"
+            app:layout_constraintEnd_toEndOf="@+id/ProfilePicture_profile"
+            app:layout_constraintStart_toStartOf="@+id/ProfilePicture_profile"
+            app:layout_constraintTop_toTopOf="@+id/ProfilePicture_profile" />
+
+
+        <RelativeLayout
+            android:id="@+id/scrollHorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/ClassAndBoard_Profile">
+
+
+            <Button
+                android:id="@+id/Solvedbutt"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="176dp"
+                android:layout_height="48dp"
+
+
+
+                android:layout_marginEnd="8dp"
+
+                android:background="@drawable/grey_butt_bg"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="16dp"
+                android:stateListAnimator="@null"
+                android:text="Solved"
+
+                android:textAllCaps="false"
+                android:textColor="#121212"
+                android:textSize="14sp"
+
+
+                />
+
+
+            <Button
+                android:id="@+id/Unsolvedbutt"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="176dp"
+                android:layout_height="48dp"
+
+
+
+                android:layout_toEndOf="@+id/Solvedbutt"
+                android:background="@drawable/grey_butt_bg"
+                android:fontFamily="sans-serif-medium"
+                android:paddingHorizontal="16dp"
+                android:stateListAnimator="@null"
+                android:text="Unsolved"
+                android:textAllCaps="false"
+
+
+                android:textColor="#121212"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewProfile"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:paddingTop="16dp"
+            android:clipToPadding="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollHorLayout" />
+
+        <ImageView
+            android:id="@+id/noResults"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="84dp"
+            android:layout_marginTop="44dp"
+           android:layout_marginBottom="240dp"
+
+            android:src="@drawable/notfound"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollHorLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

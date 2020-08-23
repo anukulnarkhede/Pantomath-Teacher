@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Home.DoubtDetails"
+    android:background="#fff"
+    >
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
+
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:translationZ="2dp"
+
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/DoubtDetailsToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="2dp"
+                android:translationZ="2dp"
+                android:background="#fff">
+
+                <TextView
+
+                    android:id="@+id/toolbar_DoubtsDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Doubt"
+                    android:textColor="@color/blue"
+                    android:textSize="20sp"
+                    tools:ignore="HardcodedText" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:visibility="gone"
+            android:background="#999999"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ProfilePictureDoubtsDetails"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/personal_info"
+            app:layout_constraintBottom_toBottomOf="@+id/timeTextDD"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/NameHolderDoubtDetails" />
+
+
+        <TextView
+            android:id="@+id/NameHolderDoubtDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/red"
+            android:textSize="16sp"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/ProfilePictureDoubtsDetails"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/timeTextDD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="2 hours ago"
+            android:textColor="#999999"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/ProfilePictureDoubtsDetails"
+            app:layout_constraintTop_toBottomOf="@+id/NameHolderDoubtDetails"
+            tools:ignore="HardcodedText,SmallSp" />
+
+
+        <Button
+            android:id="@+id/subjectTagDD"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:clickable="false"
+            android:stateListAnimator="@null"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:paddingHorizontal="16dp"
+            android:background="@drawable/subject_button_bg"
+            android:text="Algebra"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginBottom="16dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+            tools:ignore="HardcodedText" />
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/imageSliderDD"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/subjectTagDD"/>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayout_dotsIndicator_Solve"
+            android:layout_width="17.6dp"
+            android:layout_height="6.6dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/ic_dot_first_photo"
+            android:orientation="horizontal"
+            android:padding="6.6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageSliderDD">
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/QuestionTextDD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView TextView TextView TextView TextView TextView TextView TextView"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:textSize="16sp"
+            android:autoLink="web|email"
+            android:textColor="#121212"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout_dotsIndicator_Solve"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/solvedDD"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="16dp"
+
+
+            android:background="@drawable/square_small_bg_alg"
+            android:padding="6dp"
+            android:layout_marginTop="16dp"
+
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/QuestionTextDD"
+            app:srcCompat="@drawable/ic_round_check_circle_24_alg" />
+
+        <TextView
+            android:id="@+id/solvedTextDD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8.8dp"
+            android:fontFamily="sans-serif-medium"
+            android:text="Solved"
+            android:textColor="@color/red"
+            android:textSize="13.2sp"
+            app:layout_constraintBottom_toBottomOf="@+id/solvedDD"
+            app:layout_constraintStart_toEndOf="@+id/solvedDD"
+            app:layout_constraintTop_toTopOf="@+id/solvedDD"
+            tools:ignore="HardcodedText" />
+
+
+        <ImageView
+            android:id="@+id/UpArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_up_arrow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/solvedDD" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardHomeDD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/doubt_card_bg"
+            android:paddingBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/UpArrow"
+
+
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="16dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ProfilePictureTeacherDoubtsDetails"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/personal_info"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <TextView
+                android:id="@+id/NameHolderDoubtDetailsTeacher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="User"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/ProfilePictureTeacherDoubtsDetails"
+                app:layout_constraintTop_toTopOf="@+id/ProfilePictureTeacherDoubtsDetails"
+                tools:ignore="HardcodedText" />
+
+
+            <TextView
+                android:id="@+id/timeTextDDTeacher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="2 hours ago"
+                android:textColor="#999"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/ProfilePictureTeacherDoubtsDetails"
+                app:layout_constraintStart_toEndOf="@+id/ProfilePictureTeacherDoubtsDetails"
+                app:layout_constraintTop_toBottomOf="@+id/NameHolderDoubtDetailsTeacher"
+                tools:ignore="HardcodedText,SmallSp" />
+
+
+            <TextView
+                android:id="@+id/AnswerTextDD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                android:autoLink="web|email"
+                android:text="TextView TextView TextView TextView TextView TextView TextView TextView www.google.com"
+                android:textColor="#121212"
+                android:textSize="16sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ProfilePictureTeacherDoubtsDetails"
+                tools:ignore="HardcodedText" />
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/AnsimageSliderDD"
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/AnswerTextDD" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/AnslinearLayout_dotsIndicator_DD"
+                android:layout_width="17.6dp"
+                android:layout_height="6.6dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_dot_first_photo"
+                android:orientation="horizontal"
+                android:padding="6.6dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/AnsimageSliderDD">
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Answer"
+                android:textColor="#121212"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/TimerRecordDD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/AnslinearLayout_dotsIndicator_DD"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginHorizontal="16dp"
+
+                android:background="@drawable/text_view_bg_red"
+                >
+
+            <Chronometer
+                android:id="@+id/timerDD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                app:layout_constraintLeft_toRightOf="@+id/CancelAudio"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/red"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+                android:gravity="center_vertical"
+
+
+                />
+
+            <Button
+                android:id="@+id/PlayPauseDD"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:alpha="1"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/play_red"
+                app:layout_constraintLeft_toRightOf="@+id/timerDD"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+
+                />
+
+            <Button
+                android:id="@+id/PauseDD"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:alpha="1"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                android:background="@drawable/pause_red"
+                app:layout_constraintLeft_toRightOf="@+id/timerDD"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"
+                android:gravity="center_vertical"
+                />
+
+            <SeekBar
+                android:layout_gravity="center_vertical"
+                android:id="@+id/audioSeekBarDD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/PlayPauseDD"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="-2dp"
+                android:layout_marginEnd="16dp"
+
+
+
+                />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/SolveNow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Solve Now"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:stateListAnimator="@null"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/blue"
+            app:layout_constraintTop_toBottomOf="@+id/cardHomeDD"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/text_view_bg"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            tools:ignore="HardcodedText" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

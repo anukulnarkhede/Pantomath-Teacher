@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Solve.Solve"
+    android:background="#fff"
+
+    >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:elevation="2dp"
+        android:translationZ="2dp"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/SolveToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="2dp"
+            android:translationZ="2dp"
+            android:background="#fff">
+
+            <TextView
+
+                android:id="@+id/toolbar_DoubtsDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="sans-serif-medium"
+                android:text="Your Answer"
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+
+
+    <ScrollView
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/appBarLayout">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingBottom="17.6dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/StudentTagSolve"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:background="@drawable/subject_button_bg"
+        android:clickable="false"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:paddingHorizontal="16dp"
+        android:stateListAnimator="@null"
+        android:text="10th SSC"
+        android:textAllCaps="false"
+        android:textColor="@color/red"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question: "
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="20dp"
+        android:textSize="16sp"
+        android:textColor="#121212"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StudentTagSolve"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/questionTextSolve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I need some help with finding focal length of concave mirror and image formed by convex mirror."
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:layout_marginHorizontal="20dp"
+        android:textSize="16sp"
+        android:textColor="#999999"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/StudentnameSolve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="- Clair Brown"
+        android:textSize="14sp"
+        android:textColor="#999999"
+        android:layout_marginEnd="24dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionTextSolve"
+        tools:ignore="HardcodedText" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/imageSliderAnswerQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StudentnameSolve"/>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayout_dotsIndicator_Solve"
+        android:layout_width="17.6dp"
+        android:layout_height="6.6dp"
+        android:layout_marginTop="7.7dp"
+        android:background="@drawable/ic_dot_first_photo"
+        android:orientation="horizontal"
+        android:padding="6.6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageSliderAnswerQuestion"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="horizontal"
+            android:id="@+id/CardBGsolve"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/doubt_card_bg"
+            android:paddingBottom="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout_dotsIndicator_Solve"
+            app:layout_constraintVertical_bias="0.236">
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/TimerRecordDD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/text_view_bg_red"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@id/LinkText">
+
+
+                <Button
+                    android:id="@+id/CancelAudio"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="start|center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/ic_rounded_cross"
+                    android:gravity="center_vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Chronometer
+                    android:id="@+id/timerDD"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/red"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/CancelAudio"
+
+                    app:layout_constraintTop_toTopOf="parent"
+
+
+                    />
+
+                <Button
+                    android:id="@+id/PlayPauseDD"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:alpha="1"
+                    android:background="@drawable/play_red"
+                    android:gravity="center_vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/timerDD"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+                <Button
+                    android:id="@+id/PauseDD"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:alpha="1"
+                    android:background="@drawable/pause_red"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/timerDD"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <SeekBar
+                    android:id="@+id/audioSeekBarDD"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="-2dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/PlayPauseDD"
+                    app:layout_constraintTop_toTopOf="parent"
+
+
+                    />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:id="@+id/YourAnswer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif"
+                android:text="Your Answer :"
+                android:textColor="#121212"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+
+            <com.jackandphantom.circularimageview.RoundedImage
+                android:id="@+id/DoubtUploadImage1"
+                android:layout_width="155dp"
+                android:layout_height="190dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_view_bg"
+                app:layout_constraintEnd_toStartOf="@+id/DoubtUploadImage2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/YourAnswer"
+                app:rounded_radius="20" />
+
+            <com.jackandphantom.circularimageview.RoundedImage
+                android:id="@+id/DoubtUploadImage2"
+                android:layout_width="155dp"
+                android:layout_height="190dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_view_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/YourAnswer"
+                app:rounded_radius="20" />
+
+            <Button
+                android:id="@+id/Image1cancel_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:alpha="0.6"
+                android:background="@drawable/ic_rounded_cross"
+                app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage1"
+                app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage1"
+                app:layout_constraintHorizontal_bias="0.931"
+                app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage1"
+                app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage1"
+                app:layout_constraintVertical_bias="0.042" />
+
+            <Button
+                android:id="@+id/Image2cancel_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:alpha="0.6"
+                android:background="@drawable/ic_rounded_cross"
+                app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage2"
+                app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage2"
+                app:layout_constraintHorizontal_bias="0.938"
+                app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage2"
+                app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage2"
+                app:layout_constraintVertical_bias="0.042" />
+
+            <TextView
+                android:id="@+id/addPhoto1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add a Photo"
+                android:textColor="#999999"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage1"
+                app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage1"
+                app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage1"
+                app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage1"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/addPhoto2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Add a Photo"
+                android:textColor="#999999"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage2"
+                app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage2"
+                app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage2"
+                app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage2"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/LinkText"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:autoLink="all"
+                android:background="@drawable/image_view_bg"
+                android:fontFamily="sans-serif"
+
+                android:hint="Paste link here"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/TimerRecordDD"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/DoubtUploadImage1"
+                tools:ignore="HardcodedText"
+
+                />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:orientation="horizontal"
+                android:id="@+id/recordButt"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/tap_to_solve_red"
+
+                android:paddingHorizontal="16dp"
+
+                android:elevation="12dp"
+                android:hapticFeedbackEnabled="true"
+                android:stateListAnimator="@null"
+                android:text="Tap and hold to record"
+                android:textAllCaps="false"
+
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/TimerRecordDD"
+                tools:ignore="HardcodedText,RtlHardcoded"
+
+                >
+
+                <ImageView
+                    android:id="@+id/AudioIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+
+                    android:background="@drawable/record_red"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="56dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintEnd_toEndOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintHorizontal_bias="0.938"
+                    app:layout_constraintStart_toStartOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintTop_toTopOf="@+id/DoubtUploadImage2"
+                    app:layout_constraintVertical_bias="0.042" />
+
+
+                <TextView
+                    android:id="@+id/RecordButtText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textAllCaps="false"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/red"
+                    android:layout_gravity="center_vertical"
+                    android:text="Tap and Hold To Record"/>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:id="@+id/WriteYourAns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:text="Write your Answer :"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recordButt"
+                tools:ignore="HardcodedText" />
+
+            <EditText
+                android:id="@+id/answerSolve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:background="#00FFFFFF"
+                android:hint="Answer"
+                android:paddingHorizontal="2dp"
+                android:paddingVertical="4dp"
+                android:textColor="#000000"
+                android:textColorHint="@color/grey_muted_hint"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/WriteYourAns"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/TapToRecord"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="#00FFFFFF"
+
+                app:layout_constraintBottom_toBottomOf="@+id/recordButt"
+                app:layout_constraintEnd_toEndOf="@+id/recordButt"
+                app:layout_constraintStart_toStartOf="@+id/recordButt"
+                app:layout_constraintTop_toTopOf="@+id/recordButt" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/UploadSolve"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/tap_to_solve_red"
+            app:layout_constraintTop_toBottomOf="@id/CardBGsolve"
+            android:text="Upload Answer"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginHorizontal="16dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/red"
+            android:layout_marginTop="16dp"
+            android:stateListAnimator="@null"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+
+
+        <ProgressBar
+            android:id="@+id/progressBarSolve"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </ScrollView>
+</RelativeLayout>

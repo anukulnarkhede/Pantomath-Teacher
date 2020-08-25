@@ -192,7 +192,7 @@ public class NotificationsFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -231,7 +231,7 @@ public class NotificationsFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -269,7 +269,7 @@ public class NotificationsFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -308,7 +308,7 @@ public class NotificationsFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 

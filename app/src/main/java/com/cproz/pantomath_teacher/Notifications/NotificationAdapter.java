@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,6 +56,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
         assert dateTime != null;
         long mili = dateTime.getTime();
 
+        holder.SolvedText.setVisibility(View.GONE);
+        holder.SolvedIcon.setVisibility(View.GONE);
+
         final String datex = DateUtils.getRelativeTimeSpanString(mili).toString();
 
         holder.TimeTextNotification.setText(datex);
@@ -71,27 +75,50 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationViewHo
             }
 
 
+
+            if (DoubtList.get(position).getStatus().equals("Solved")){
+                holder.SolvedIcon.setVisibility(View.VISIBLE);
+                holder.SolvedText.setVisibility(View.VISIBLE);
+            }else{
+                holder.SolvedIcon.setVisibility(View.GONE);
+                holder.SolvedText.setVisibility(View.GONE);
+            }
+
         //holder.StudentTagNotifications.setText(DoubtList.get(position).getSubject());
 
         if (DoubtList.get(position).getBoard().equals("SSC")&&DoubtList.get(position).getSTD().equals("9th")){
             holder.constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_physics);
             holder.StudentTagNotifications.setBackgroundResource(R.drawable.subject_button_bg_phy);
             holder.StudentTagNotifications.setTextColor(Color.parseColor("#0078FF"));
+            holder.SolvedIcon.setBackgroundResource(R.drawable.square_small_bg);
+            holder.SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24);
+            holder.SolvedText.setTextColor(Color.parseColor("#0078FF"));
+
         }else
             if (DoubtList.get(position).getBoard().equals("SSC")&&DoubtList.get(position).getSTD().equals("10th")){
             holder.constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg);
             holder.StudentTagNotifications.setBackgroundResource(R.drawable.subject_button_bg);
             holder.StudentTagNotifications.setTextColor(Color.parseColor("#FF2829"));
+                holder.SolvedIcon.setBackgroundResource(R.drawable.square_small_bg_alg);
+                holder.SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_alg);
+                holder.SolvedText.setTextColor(Color.parseColor("#FF2829"));
         }else
             if (DoubtList.get(position).getBoard().equals("CBSE")&&DoubtList.get(position).getSTD().equals("9th")){
                 holder.constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_geom);
                 holder.StudentTagNotifications.setBackgroundResource(R.drawable.subject_button_bg_geom);
                 holder.StudentTagNotifications.setTextColor(Color.parseColor("#9A0D91"));
+                holder.SolvedIcon.setBackgroundResource(R.drawable.square_small_bg_geom);
+                holder.SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_geom);
+                holder.SolvedText.setTextColor(Color.parseColor("#9A0D91"));
             }else
                 if (DoubtList.get(position).getBoard().equals("CBSE")&&DoubtList.get(position).getSTD().equals("10th")){
                     holder.constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_geog);
                     holder.StudentTagNotifications.setBackgroundResource(R.drawable.subject_button_bg_geog);
                     holder.StudentTagNotifications.setTextColor(Color.parseColor("#009F37"));
+                    holder.SolvedIcon.setBackgroundResource(R.drawable.small_squar_bg_geog);
+                    holder.SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_geog);
+                    holder.SolvedText.setTextColor(Color.parseColor("#009F37"));
+
                 }
 
         holder.constraintLayout.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +169,8 @@ class NotificationViewHolder extends RecyclerView.ViewHolder{
     Button StudentTagNotifications;
     ConstraintLayout constraintLayout;
     CircleImage profileImage;
+    ImageView SolvedIcon;
+    TextView SolvedText;
 
     public NotificationViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -157,5 +186,7 @@ class NotificationViewHolder extends RecyclerView.ViewHolder{
         StudentTagNotifications = view.findViewById(R.id.StudentTag_Notification);
         constraintLayout = view.findViewById(R.id.notification_card_bg);
         profileImage = view.findViewById(R.id.profilePicStu);
+        SolvedIcon = view.findViewById(R.id.solvedIconNotifications);
+        SolvedText = view.findViewById(R.id.solvedTextNotification);
     }
 }

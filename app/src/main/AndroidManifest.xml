@@ -51,6 +51,7 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".Home.Home"
+            android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTop"
             android:theme="@style/home" />
         <activity android:name=".Login.Login" />

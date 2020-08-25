@@ -1,16 +1,29 @@
 package com.cproz.pantomath_teacher.Home;
 
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +44,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
@@ -57,8 +71,18 @@ public class HomeFragment extends Fragment {
     String Subject;
     String SSC, CBSE;
     String class9, class10;
+    ImageView Cross;
+    EditText SearchView;
+    CardView cardView;
+    ImageView searchIcon;
+
+    ImageView noResults;
 
 
+
+
+
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,6 +92,9 @@ public class HomeFragment extends Fragment {
         Initialisation(root);
         db = FirebaseFirestore.getInstance();
 
+
+        Cross.setVisibility(View.GONE);
+        noResults.setVisibility(View.GONE);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 1);
 
@@ -114,6 +141,86 @@ public class HomeFragment extends Fragment {
 
 
 
+        SearchView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                InputMethodManager imm = (InputMethodManager) Objects.requireNonNull(getActivity()).getSystemService(Context.INPUT_METHOD_SERVICE);
+                Objects.requireNonNull(imm).hideSoftInputFromWindow(SearchView.getWindowToken(), 0);
+
+
+
+
+                return false;
+
+            }
+        });
+
+
+
+
+        SearchView.setOnTouchListener(new View.OnTouchListener() {
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                searchIcon.setImageResource(R.drawable.back_search);
+
+                searchIcon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        InputMethodManager imm = (InputMethodManager) Objects.requireNonNull(getContext()).getSystemService(Context.INPUT_METHOD_SERVICE);
+                        assert imm != null;
+                        imm.hideSoftInputFromWindow(root.getWindowToken(), 0);
+                        SearchView.clearFocus();
+                        SearchView.getText().clear();
+                        Cross.setVisibility(View.GONE);
+                        searchIcon.setImageResource(R.drawable.ic_round_search_24);
+                        swipeRefreshLayout.setEnabled(true);
+
+                    }
+                });
+
+
+
+                SearchView.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @SuppressLint("ClickableViewAccessibility")
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                        //ProfilePictureHome.setImageResource(R.drawable.cross);
+                        Cross.setVisibility(View.VISIBLE);
+                        Cross.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                SearchView.getText().clear();
+
+                                Cross.setVisibility(View.GONE);
+
+
+                            }
+                        });
+
+
+
+                    }
+                });
+
+
+                return false;
+            }
+        });
 
 
 
@@ -127,6 +234,11 @@ public class HomeFragment extends Fragment {
         recyclerView = root.findViewById(R.id.RecyclerViewHome);
         swipeRefreshLayout = root.findViewById(R.id.refreshLayout);
         bottomNavigationView = root.findViewById(R.id.bottomNavStdAppStart);
+        SearchView = root.findViewById(R.id.SearchEditText);
+        searchIcon = root.findViewById(R.id.searchIcon);
+        cardView = root.findViewById(R.id.searchBarHome);
+        Cross = root.findViewById(R.id.Cross);
+        noResults = root.findViewById(R.id.noResultsImg);
 
     }
 
@@ -149,7 +261,7 @@ public class HomeFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -165,6 +277,31 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+        SearchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                filter(s.toString());
+
+
+
+            }
+        });
+
+
+
+
     }
 
 
@@ -188,7 +325,7 @@ public class HomeFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -204,6 +341,30 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+        SearchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                filter(s.toString());
+
+
+
+            }
+        });
+
+
+
     }
 
 
@@ -226,7 +387,7 @@ public class HomeFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -242,6 +403,30 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+        SearchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                filter(s.toString());
+
+
+
+            }
+        });
+
+
+
     }
 
 
@@ -263,7 +448,7 @@ public class HomeFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -279,6 +464,30 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+
+
+        SearchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                filter(s.toString());
+
+
+
+            }
+        });
+
+
     }
 
 
@@ -339,4 +548,43 @@ public class HomeFragment extends Fragment {
         super.onResume();
 
     }
+
+    private void filter(String text) {
+
+        recyclerView.setBackgroundColor(Color.parseColor("#ffffff"));
+
+        ArrayList<HomeDoubtData> filteredList = new ArrayList<>();
+        for (HomeDoubtData item: DoubtList2){
+
+            if (item.getNameHome().toLowerCase().startsWith(text.toLowerCase())||item.getQText().toLowerCase().contains(text.toLowerCase())
+                    || item.getAnsText().toLowerCase().contains(text.toLowerCase())){
+
+                filteredList.add(item);
+                homeDoubtAdapter.filteredList(filteredList);
+                swipeRefreshLayout.setEnabled(false);
+                noResults.setVisibility(View.GONE);
+
+            }
+
+
+
+        }
+        if (filteredList.isEmpty()){
+
+            homeDoubtAdapter.filteredList(filteredList);
+            //recyclerView.setBackgroundColor(R.drawable.notfound);
+            noResults.setVisibility(View.VISIBLE);
+
+
+            //Toast.makeText(getContext(), "No results found", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+
+
+    }
+
+
 }

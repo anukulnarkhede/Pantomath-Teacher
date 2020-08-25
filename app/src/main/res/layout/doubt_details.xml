@@ -415,16 +415,13 @@
             android:textAllCaps="false"
             android:textSize="16sp"
             android:fontFamily="sans-serif-medium"
-            android:stateListAnimator="@null"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/blue"
+            android:textColor="@color/red"
             app:layout_constraintTop_toBottomOf="@+id/cardHomeDD"
             android:layout_marginTop="16dp"
             android:layout_marginHorizontal="16dp"
-            android:background="@drawable/text_view_bg"
-
+            android:background="@drawable/tap_to_solve_selector_red"
             app:layout_constraintBottom_toBottomOf="parent"
-
             tools:ignore="HardcodedText" />
 
 

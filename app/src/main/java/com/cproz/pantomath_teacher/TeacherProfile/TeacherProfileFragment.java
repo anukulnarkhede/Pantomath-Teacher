@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -90,6 +91,7 @@ public class TeacherProfileFragment extends Fragment {
     String Subject;
     String SSC, CBSE;
     String class9, class10;
+    RadioGroup radioGroup;
 
 
     @Nullable
@@ -138,28 +140,37 @@ public class TeacherProfileFragment extends Fragment {
 
 
 
-                unsolved.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Status = "Unsolved";
-                        DoubtList2.clear();
-                        Decision("Unsolved");
-                        unsolved.setEnabled(false);
-                        solved.setEnabled(false);
 
+                radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        switch (checkedId){
+                            case R.id.Solvedbutt:
+
+
+                                DoubtList2.clear();
+                                Decision("Solved");
+                                solved.setEnabled(false);
+                                unsolved.setEnabled(false);
+
+
+                                break;
+
+                            case R.id.Unsolvedbutt:
+
+                                Status = "Unsolved";
+                                DoubtList2.clear();
+                                Decision("Unsolved");
+                                unsolved.setEnabled(false);
+                                solved.setEnabled(false);
+
+                                break;
+                        }
                     }
                 });
 
-                solved.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DoubtList2.clear();
-                        Decision("Solved");
-                        solved.setEnabled(false);
-                        unsolved.setEnabled(false);
 
-                    }
-                });
+
 
 
             }
@@ -205,6 +216,7 @@ public class TeacherProfileFragment extends Fragment {
         solved = root.findViewById(R.id.Solvedbutt);
         unsolved = root.findViewById(R.id.Unsolvedbutt);
         noResults = root.findViewById(R.id.noResults);
+        radioGroup = root.findViewById(R.id.scrollHorLayout);
 
 
 
@@ -442,7 +454,7 @@ public class TeacherProfileFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -492,7 +504,7 @@ public class TeacherProfileFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -539,7 +551,7 @@ public class TeacherProfileFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 
@@ -585,7 +597,7 @@ public class TeacherProfileFragment extends Fragment {
                             querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
                             querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
                             querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), "");
+                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
 
                     DoubtList2.add(homeDoubtData);
 

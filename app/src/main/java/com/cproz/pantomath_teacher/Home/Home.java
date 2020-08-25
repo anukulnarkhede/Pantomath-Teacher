@@ -60,6 +60,8 @@ public class Home extends AppCompatActivity {
         initialisation();
 
 
+
+
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
 

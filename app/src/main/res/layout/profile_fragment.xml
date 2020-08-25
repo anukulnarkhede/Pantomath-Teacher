@@ -135,8 +135,9 @@
             app:layout_constraintTop_toTopOf="@+id/ProfilePicture_profile" />
 
 
-        <RelativeLayout
+        <RadioGroup
             android:id="@+id/scrollHorLayout"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -146,9 +147,9 @@
             app:layout_constraintTop_toBottomOf="@+id/ClassAndBoard_Profile">
 
 
-            <Button
+            <RadioButton
                 android:id="@+id/Solvedbutt"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+
                 android:layout_width="176dp"
                 android:layout_height="48dp"
 
@@ -156,10 +157,13 @@
 
                 android:layout_marginEnd="8dp"
 
-                android:background="@drawable/grey_butt_bg"
+                android:background="@drawable/all_subject_bg_selector"
+                android:button="@drawable/all_subject_bg_selector"
+                android:checked="true"
+                android:textAlignment="center"
                 android:fontFamily="sans-serif-medium"
                 android:paddingHorizontal="16dp"
-                android:stateListAnimator="@null"
+
                 android:text="Solved"
 
                 android:textAllCaps="false"
@@ -170,16 +174,18 @@
                 />
 
 
-            <Button
+            <RadioButton
                 android:id="@+id/Unsolvedbutt"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:button="@drawable/all_subject_bg_selector"
                 android:layout_width="176dp"
                 android:layout_height="48dp"
 
 
 
-                android:layout_toEndOf="@+id/Solvedbutt"
-                android:background="@drawable/grey_butt_bg"
+
+
+                android:background="@drawable/all_subject_bg_selector"
+                android:textAlignment="center"
                 android:fontFamily="sans-serif-medium"
                 android:paddingHorizontal="16dp"
                 android:stateListAnimator="@null"
@@ -191,14 +197,14 @@
                 android:textSize="14sp" />
 
 
-        </RelativeLayout>
+        </RadioGroup>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewProfile"
             android:layout_width="match_parent"
             android:layout_height="550dp"
             android:paddingTop="16dp"
-            android:clipToPadding="false"
+            android:clipToPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scrollHorLayout" />

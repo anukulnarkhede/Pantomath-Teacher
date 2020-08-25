@@ -28,6 +28,8 @@ import android.widget.TextView;
 
 import com.cproz.pantomath_teacher.R;
 import com.cproz.pantomath_teacher.Solve.Solve;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -127,7 +129,7 @@ public class DoubtDetails extends AppCompatActivity {
             TeacherUserName.setTextColor(Color.parseColor("#0078FF"));
             constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_physics);
             SolveNow.setTextColor(Color.parseColor("#0078FF"));
-            SolveNow.setBackgroundResource(R.drawable.text_view_bg);
+            SolveNow.setBackgroundResource(R.drawable.tap_to_solve_selector_blue);
             Play.setBackgroundResource(R.drawable.play_blue);
             Pause.setBackgroundResource(R.drawable.pause_blue);
             AudioPlayer.setBackgroundResource(R.drawable.text_view_bg);
@@ -152,6 +154,11 @@ public class DoubtDetails extends AppCompatActivity {
             }
 
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+
+
             if (Objects.equals(bundle.getString("Status"), "Unsolved")){
 
                 constraintLayout.setVisibility(View.GONE);
@@ -165,9 +172,16 @@ public class DoubtDetails extends AppCompatActivity {
             }
             else
                 if (Objects.equals(bundle.getString("Status"), "Solved")){
-                    constraintLayout.setVisibility(View.VISIBLE);
-                    upArrow.setVisibility(View.VISIBLE);
-                    SolveNow.setText("Edit Answer");
+
+                    assert user != null;
+                    if (Objects.equals(bundle.getString("TeacherEmail"), user.getEmail())){
+                        constraintLayout.setVisibility(View.VISIBLE);
+                        upArrow.setVisibility(View.VISIBLE);
+                        SolveNow.setText("Edit Answer");
+                    }
+                    else{
+                        SolveNow.setVisibility(View.GONE);
+                    }
                 }
 
 

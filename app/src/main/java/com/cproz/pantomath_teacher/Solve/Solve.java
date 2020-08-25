@@ -116,7 +116,6 @@ public class Solve extends AppCompatActivity {
 
     public DocumentReference ref;
     FirebaseStorage firebaseStorage;
-    private int PERMISSION_CODE = 120000;
 
 
     @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
@@ -165,7 +164,7 @@ public class Solve extends AppCompatActivity {
             //TapToRecord.setCompoundDrawables(img, null, null, null);
             StudentTag.setTextColor(Color.parseColor("#007AFF"));
             StudentTag.setBackgroundResource(R.drawable.subject_button_bg_phy);
-            Answer.setBackgroundResource(R.drawable.text_view_bg);
+            Answer.setBackgroundResource(R.drawable.tap_to_solve_selector_blue);
             Answer.setTextColor(Color.parseColor("#007AFF"));
             recordTimer.setBackgroundResource(R.drawable.text_view_bg);
             chronometer.setTextColor(Color.parseColor("#007AFF"));
@@ -191,6 +190,7 @@ public class Solve extends AppCompatActivity {
                 TeacherImageUrl = documentSnapshot.getString("profileURl");
 
                 Answer.setOnClickListener(new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onClick(View v) {
                         DateTime = new Date();
@@ -363,7 +363,6 @@ public class Solve extends AppCompatActivity {
                     fileName = Objects.requireNonNull(getExternalCacheDir()).getAbsolutePath();
                     fileName += "/recordedAnsAudio.3gp";
                     startRecording(fileName);
-
                     final Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                     assert vibrator != null;
                     vibrator.vibrate(VibrationEffect.createOneShot(25, 25));
@@ -975,7 +974,7 @@ public class Solve extends AppCompatActivity {
             String Status = "Solved";
 
         ref.update("AnsPhotoUrl1", AnswerPhoto1url, "AnsPhotoUrl2", AnswerPhoto2url, "AnsText", GetAnswer, "AudioUrl", AudioUrl, "DateTime", DateTime , "FileUrl", FileUrl, "Link", GetLink
-        ,"Status", Status ,"Teacher", TeacherName, "TeacherImageUrl", TeacherImageUrl
+        ,"Status", Status ,"Teacher", TeacherName, "TeacherImageUrl", TeacherImageUrl,"TeacherEmail", email
         ).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -1015,6 +1014,7 @@ public class Solve extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(Solve.this, recordPermission) == PackageManager.PERMISSION_GRANTED){
             return true;
         }else {
+            int PERMISSION_CODE = 1;
             ActivityCompat.requestPermissions(Solve.this, new String[]{recordPermission}, PERMISSION_CODE);
 
 
@@ -1081,7 +1081,12 @@ public class Solve extends AppCompatActivity {
 
 
 
-                mediaPlayer.start();
+                try {
+                    mediaPlayer.start();
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+
                 seekBar.setMax(mediaPlayer.getDuration()-90);
                 handler.postDelayed(runnable, 0);
                 PlayPause.setVisibility(View.GONE);

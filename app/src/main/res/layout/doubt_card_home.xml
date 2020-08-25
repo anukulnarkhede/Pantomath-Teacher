@@ -127,7 +127,7 @@
         android:fontFamily="sans-serif-medium"
         android:text="Solved"
         android:textColor="@color/red"
-        android:textSize="13.2sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/solvedDCHome"
         tools:ignore="HardcodedText" />

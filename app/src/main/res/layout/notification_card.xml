@@ -10,6 +10,8 @@
 
     >
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/notification_card_bg"
         android:layout_width="match_parent"
@@ -17,12 +19,40 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/doubt_card_bg_physics"
-        android:paddingBottom="16dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/solvedIconNotifications"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/square_small_bg"
+            android:padding="6dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeTextNotification"
+            app:srcCompat="@drawable/ic_round_check_circle_24" />
+
+        <TextView
+            android:id="@+id/solvedTextNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Solved"
+            android:textColor="@color/blue"
+            android:textSize="14sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/solvedIconNotifications"
+            app:layout_constraintStart_toEndOf="@+id/solvedIconNotifications"
+            app:layout_constraintTop_toTopOf="@+id/solvedIconNotifications"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/StudentTag_Notification"

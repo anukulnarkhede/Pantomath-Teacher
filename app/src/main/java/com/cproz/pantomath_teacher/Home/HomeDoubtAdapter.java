@@ -27,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -80,11 +81,6 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
         holder.DateText.setText(datex);
 
 
-        String AnsText = DoubtList.get(position).getAnsText();
-        String AnsPhotoUrl1 = DoubtList.get(position).getAnsPhotoUrl1(), AnsPhotoUrl2 = DoubtList.get(position).getAnsPhotoUrl2(), FileUrl = DoubtList.get(position).getFileUrl(),
-                Link = DoubtList.get(position).getLink(), Board = DoubtList.get(position).getBoard(), AudioUrl = DoubtList.get(position).getAudioUrl(),
-                Chapter = DoubtList.get(position).getChapter(), Email = DoubtList.get(position).getEmailHome(), STD = DoubtList.get(position).getSTD(), Teacher = DoubtList.get(position).getTeacher(),
-                Uid = DoubtList.get(position).getUid();
 
 
 
@@ -289,6 +285,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 intent.putExtra("Teacher", DoubtList.get(holder.getAdapterPosition()).getTeacher());
                 intent.putExtra("TeacherImage", DoubtList.get(holder.getAdapterPosition()).getTeacherImageUrl());
                 intent.putExtra("Uid", DoubtList.get(holder.getAdapterPosition()).getUid());
+                intent.putExtra("TeacherEmail", DoubtList.get(holder.getAdapterPosition()).getTeacherEmail());
 
                 mContext.startActivity(intent);
             }
@@ -321,6 +318,7 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 intent.putExtra("Teacher", DoubtList.get(holder.getAdapterPosition()).getTeacher());
                 intent.putExtra("TeacherImage", DoubtList.get(holder.getAdapterPosition()).getTeacherImageUrl());
                 intent.putExtra("Uid", DoubtList.get(holder.getAdapterPosition()).getUid());
+                intent.putExtra("TeacherEmail", DoubtList.get(holder.getAdapterPosition()).getTeacherEmail());
 
                 mContext.startActivity(intent);
             }
@@ -361,6 +359,14 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
     }
 
 
+    public void filteredList(ArrayList<HomeDoubtData> filteredList) {
+
+
+        DoubtList = filteredList;
+        notifyDataSetChanged();
+
+
+    }
 }
 
 

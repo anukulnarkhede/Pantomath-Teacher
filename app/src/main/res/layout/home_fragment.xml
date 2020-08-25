@@ -6,10 +6,27 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
+    <ImageView
+        android:id="@+id/noResultsImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/notfound"
+
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="64dp"
+        android:layout_marginBottom="300dp"
+        />
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <com.google.android.material.appbar.AppBarLayout
+    <!--<com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +65,79 @@
         </androidx.appcompat.widget.Toolbar>
 
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/searchBarHome"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="3dp"
+            android:background="@drawable/search_bar_bg"
+            android:elevation="8dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardElevation="4dp"
+
+            >
+
+
+            <ImageView
+                android:id="@+id/searchIcon"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:padding="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="2dp"
+                app:srcCompat="@drawable/ic_round_search_24"
+
+
+                />
+
+
+
+            <ImageView
+                android:id="@+id/Cross"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:scaleType="centerCrop"
+                android:padding="10dp"
+
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="2dp"
+                android:src="@drawable/cross"
+
+                />
+
+            <EditText
+
+                android:id="@+id/SearchEditText"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_vertical|center"
+                android:layout_marginStart="48dp"
+                android:layout_marginEnd="52dp"
+                android:layout_height="match_parent"
+                android:ems="10"
+
+                android:singleLine="true"
+                android:inputType="textImeMultiLine"
+                android:imeOptions="actionSearch"
+                android:textColor="#121212"
+                android:cursorVisible="true"
+                android:textColorHint="#999"
+                android:hint="Search in doubts"
+                android:textSize="16sp"
+                android:clickable="true"
+                android:backgroundTint="#fff"
+
+                tools:ignore="HardcodedText"
+                android:focusable="true" />
+        </androidx.cardview.widget.CardView>
 
 
     <View
@@ -57,34 +146,45 @@
         android:layout_height="0.5dp"
         android:background="#999999"
         android:visibility="gone"
-        android:layout_below="@+id/appBarLayout"/>
+        android:layout_below="@+id/searchBarHome"/>
 
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/refreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/view"
-        >
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
 
-
-        <androidx.recyclerview.widget.RecyclerView
-
-            android:id="@+id/RecyclerViewHome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#fff"
-            android:layout_below="@+id/toolbar_DoubtsDetails"
-            android:paddingTop="16dp"
-            android:clipToPadding="false"
-            android:overScrollMode="never"
+            android:layout_below="@+id/searchBarHome"
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_marginTop="-25dp">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/RecyclerViewHome"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/searchBarHome"
+                android:layout_marginTop="-24dp"
+                android:background="#fff"
+                android:clipToPadding="false"
+                android:elevation="0dp"
+                android:overScrollMode="never"
+                android:paddingTop="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+
+
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
+
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

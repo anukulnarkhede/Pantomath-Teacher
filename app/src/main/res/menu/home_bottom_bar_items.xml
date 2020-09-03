@@ -12,7 +12,7 @@
 
     <item android:id="@+id/Notification"
 
-        android:title="Notification"
+        android:title="Notifications"
         android:icon="@drawable/notifications"
 
         tools:ignore="HardcodedText">

@@ -153,7 +153,7 @@ public class Solve extends AppCompatActivity {
         StudentNameText.setText(toTitleCase(Objects.requireNonNull("- " + bundle.getString("Name"))));
         StudentTag.setText(bundle.getString("STD") + " " + bundle.getString("Board"));
 
-        if (Objects.equals(bundle.getString("STD"), "9th")){
+        if (Objects.equals(bundle.getString("STD"), "9th") && Objects.equals(bundle.getString("Board"), "SSC")){
 
             constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_physics);
             TapToRecord.setBackgroundResource(R.drawable.text_view_bg);
@@ -172,6 +172,141 @@ public class Solve extends AppCompatActivity {
 
             if (PlayPause.isEnabled()){
                 PlayPause.setBackgroundResource(R.drawable.play_blue);
+            }
+            else
+            {
+                PlayPause.setBackgroundResource(R.drawable.play_disabled);
+            }
+
+
+
+        }else if (Objects.equals(bundle.getString("STD"), "10th")&& Objects.equals(bundle.getString("Board"), "SSC")){
+
+            constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg);
+            TapToRecord.setBackgroundResource(R.drawable.text_view_bg_red);
+            record_text.setTextColor(Color.parseColor("#FF2829"));
+            recordIcon.setImageResource(R.drawable.record_red);
+            //@SuppressLint("UseCompatLoadingForDrawables") Drawable img = this.getResources().getDrawable(R.drawable.record_blue);
+            //img.setBounds(0, 0, 65, 65);
+            //TapToRecord.setCompoundDrawables(img, null, null, null);
+            StudentTag.setTextColor(Color.parseColor("#FF2829"));
+            StudentTag.setBackgroundResource(R.drawable.subject_button_bg);
+            Answer.setBackgroundResource(R.drawable.tap_to_solve_selector_red);
+            Answer.setTextColor(Color.parseColor("#FF2829"));
+            recordTimer.setBackgroundResource(R.drawable.text_view_bg_red);
+            chronometer.setTextColor(Color.parseColor("#FF2829"));
+            Pause.setBackgroundResource(R.drawable.pause_red);
+
+            if (PlayPause.isEnabled()){
+                PlayPause.setBackgroundResource(R.drawable.play_red);
+            }
+            else
+            {
+                PlayPause.setBackgroundResource(R.drawable.play_disabled);
+            }
+
+
+
+        }else if (Objects.equals(bundle.getString("STD"), "9th")&& Objects.equals(bundle.getString("Board"), "CBSE")){
+
+            constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_geom);
+            TapToRecord.setBackgroundResource(R.drawable.text_view_bg_geom);
+            record_text.setTextColor(Color.parseColor("#9A0D91"));
+            recordIcon.setImageResource(R.drawable.record_geom);
+            //@SuppressLint("UseCompatLoadingForDrawables") Drawable img = this.getResources().getDrawable(R.drawable.record_blue);
+            //img.setBounds(0, 0, 65, 65);
+            //TapToRecord.setCompoundDrawables(img, null, null, null);
+            StudentTag.setTextColor(Color.parseColor("#9A0D91"));
+            StudentTag.setBackgroundResource(R.drawable.subject_button_bg_geom);
+            Answer.setBackgroundResource(R.drawable.tap_to_solve_geom);
+            Answer.setTextColor(Color.parseColor("#9A0D91"));
+            recordTimer.setBackgroundResource(R.drawable.text_view_bg_geom);
+            chronometer.setTextColor(Color.parseColor("#9A0D91"));
+            Pause.setBackgroundResource(R.drawable.pause_geom);
+
+            if (PlayPause.isEnabled()){
+                PlayPause.setBackgroundResource(R.drawable.play_geometry);
+            }
+            else
+            {
+                PlayPause.setBackgroundResource(R.drawable.play_disabled);
+            }
+
+
+
+        }else if (Objects.equals(bundle.getString("STD"), "10th")&& Objects.equals(bundle.getString("Board"), "CBSE")){
+
+            constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_geog);
+            TapToRecord.setBackgroundResource(R.drawable.text_view_bg_geog);
+            record_text.setTextColor(Color.parseColor("#009F37"));
+            recordIcon.setImageResource(R.drawable.record_geog);
+            //@SuppressLint("UseCompatLoadingForDrawables") Drawable img = this.getResources().getDrawable(R.drawable.record_blue);
+            //img.setBounds(0, 0, 65, 65);
+            //TapToRecord.setCompoundDrawables(img, null, null, null);
+            StudentTag.setTextColor(Color.parseColor("#009F37"));
+            StudentTag.setBackgroundResource(R.drawable.subject_button_bg_geog);
+            Answer.setBackgroundResource(R.drawable.tap_to_solve_geog);
+            Answer.setTextColor(Color.parseColor("#009F37"));
+            recordTimer.setBackgroundResource(R.drawable.text_view_bg_geog);
+            chronometer.setTextColor(Color.parseColor("#009F37"));
+            Pause.setBackgroundResource(R.drawable.pause_geog);
+
+            if (PlayPause.isEnabled()){
+                PlayPause.setBackgroundResource(R.drawable.play_geog);
+            }
+            else
+            {
+                PlayPause.setBackgroundResource(R.drawable.play_disabled);
+            }
+
+
+
+        }else if (Objects.equals(bundle.getString("STD"), "9th")&& Objects.equals(bundle.getString("Board"), "ICSE")){
+
+            constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_chem);
+            TapToRecord.setBackgroundResource(R.drawable.text_view_bg_chem);
+            record_text.setTextColor(Color.parseColor("#FF9B00"));
+            recordIcon.setImageResource(R.drawable.record_chem);
+            //@SuppressLint("UseCompatLoadingForDrawables") Drawable img = this.getResources().getDrawable(R.drawable.record_blue);
+            //img.setBounds(0, 0, 65, 65);
+            //TapToRecord.setCompoundDrawables(img, null, null, null);
+            StudentTag.setTextColor(Color.parseColor("#FF9B00"));
+            StudentTag.setBackgroundResource(R.drawable.subject_button_bg_chem);
+            Answer.setBackgroundResource(R.drawable.tap_to_solve_chem);
+            Answer.setTextColor(Color.parseColor("#FF9B00"));
+            recordTimer.setBackgroundResource(R.drawable.text_view_bg_chem);
+            chronometer.setTextColor(Color.parseColor("#FF9B00"));
+            Pause.setBackgroundResource(R.drawable.pause_chem);
+
+            if (PlayPause.isEnabled()){
+                PlayPause.setBackgroundResource(R.drawable.play_chem);
+            }
+            else
+            {
+                PlayPause.setBackgroundResource(R.drawable.play_disabled);
+            }
+
+
+
+        }else if (Objects.equals(bundle.getString("STD"), "10th")&& Objects.equals(bundle.getString("Board"), "ICSE")){
+
+            constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_his);
+            TapToRecord.setBackgroundResource(R.drawable.text_view_bg_his);
+            record_text.setTextColor(Color.parseColor("#813912"));
+            recordIcon.setImageResource(R.drawable.record_his);
+            //@SuppressLint("UseCompatLoadingForDrawables") Drawable img = this.getResources().getDrawable(R.drawable.record_blue);
+            //img.setBounds(0, 0, 65, 65);
+            //TapToRecord.setCompoundDrawables(img, null, null, null);
+            StudentTag.setTextColor(Color.parseColor("#813912"));
+            StudentTag.setBackgroundResource(R.drawable.subject_button_bg_his);
+            Answer.setBackgroundResource(R.drawable.tap_to_solve_his);
+            Answer.setTextColor(Color.parseColor("#813912"));
+            recordTimer.setBackgroundResource(R.drawable.text_view_bg_his);
+            chronometer.setTextColor(Color.parseColor("#813912"));
+            Pause.setBackgroundResource(R.drawable.pause_his);
+
+            if (PlayPause.isEnabled()){
+                PlayPause.setBackgroundResource(R.drawable.play_his);
             }
             else
             {
@@ -972,8 +1107,9 @@ public class Solve extends AppCompatActivity {
 
             ref = firebaseFirestore.collection("Doubts" ).document(Uid);
             String Status = "Solved";
+            Date date = new Date();
 
-        ref.update("AnsPhotoUrl1", AnswerPhoto1url, "AnsPhotoUrl2", AnswerPhoto2url, "AnsText", GetAnswer, "AudioUrl", AudioUrl, "DateTime", DateTime , "FileUrl", FileUrl, "Link", GetLink
+        ref.update("AnsPhotoUrl1", AnswerPhoto1url, "AnsPhotoUrl2", AnswerPhoto2url, "AnsText", GetAnswer, "AudioUrl", AudioUrl, "DateTime", date , "FileUrl", FileUrl, "Link", GetLink
         ,"Status", Status ,"Teacher", TeacherName, "TeacherImageUrl", TeacherImageUrl,"TeacherEmail", email
         ).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

@@ -30,6 +30,7 @@ import com.cproz.pantomath_teacher.R;
 import com.cproz.pantomath_teacher.Solve.Solve;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -54,8 +55,11 @@ public class DoubtDetails extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     Handler handler = new Handler();
     Runnable runnable;
+    ImageView report;
 
+    FirebaseFirestore firebaseFirestore;
 
+    TextView reportText;
 
 
 
@@ -68,6 +72,7 @@ public class DoubtDetails extends AppCompatActivity {
         setContentView(R.layout.doubt_details);
 
 
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         Initialisation();
         setSupportActionBar(toolbar);
@@ -76,8 +81,22 @@ public class DoubtDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
 
+
+
+
+
         final Bundle bundle = getIntent().getExtras();
         assert bundle != null;
+
+
+
+
+        constraintLayout.setVisibility(View.GONE);
+        upArrow.setVisibility(View.GONE);
+        SolveNow.setVisibility(View.VISIBLE);
+        Solved.setTextColor(Color.parseColor("#999999"));
+        SolvedIcon.setBackgroundResource(R.drawable.square_small_bg_grey);
+        SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_grey);
 
 
         StudentUserName.setText(toTitleCase(Objects.requireNonNull(bundle.getString("Name"))));
@@ -94,6 +113,30 @@ public class DoubtDetails extends AppCompatActivity {
 
 
 
+        if (bundle.getString("Status").equals("Solved")){
+            report.setVisibility(View.GONE);
+            reportText.setVisibility(View.GONE);
+        }
+
+        report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                ReportPopup reportPopup = ReportPopup();
+//                reportPopup.show()
+
+                ReportPopup reportPopup = new ReportPopup();
+                Bundle args = new Bundle();
+
+                args.putString("Email", bundle.getString("Email"));
+                args.putString("uid", bundle.getString("Uid"));
+                args.putString("Teacher", bundle.getString("TeacherName"));
+
+
+                reportPopup.setArguments(args);
+                reportPopup.show(getSupportFragmentManager(), "cdfer");
+
+            }
+        });
 
 
         Solved.setText(bundle.getString("Status"));
@@ -117,7 +160,7 @@ public class DoubtDetails extends AppCompatActivity {
         QuestionText.setText(bundle.getString("QuestionText"));
 
 
-        if (Objects.equals(bundle.getString("STD"), "9th")){
+        if (Objects.equals(bundle.getString("STD"), "9th")&&Objects.equals(bundle.getString("Board"), "SSC")){
 
             SubjectTag.setText(bundle.getString("STD") + " " + bundle.getString("Board"));
             SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_phy);
@@ -137,7 +180,7 @@ public class DoubtDetails extends AppCompatActivity {
 
 
         }else
-            if (Objects.equals(bundle.getString("STD"), "10th")){
+            if (Objects.equals(bundle.getString("STD"), "10th")&&Objects.equals(bundle.getString("Board"), "SSC")){
 
                 SubjectTag.setText(bundle.getString("STD") + " " + bundle.getString("Board"));
                 SubjectTag.setBackgroundResource(R.drawable.subject_button_bg);
@@ -150,8 +193,91 @@ public class DoubtDetails extends AppCompatActivity {
                 constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg);
                 SolveNow.setTextColor(Color.parseColor("#FF2829"));
                 SolveNow.setBackgroundResource(R.drawable.text_view_bg_red);
+                Play.setBackgroundResource(R.drawable.play_red);
+                Pause.setBackgroundResource(R.drawable.pause_red);
+                AudioPlayer.setBackgroundResource(R.drawable.text_view_bg_red);
+                chronometer.setTextColor(Color.parseColor("#FF2829"));
 
             }
+            else
+            if (Objects.equals(bundle.getString("STD"), "9th")&&Objects.equals(bundle.getString("Board"), "CBSE")){
+
+                SubjectTag.setText(bundle.getString("STD") + " " + bundle.getString("Board"));
+                SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_geom);
+                SubjectTag.setTextColor(Color.parseColor("#9A0D91"));
+                StudentUserName.setTextColor(Color.parseColor("#9A0D91"));
+                SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_geom);
+                SolvedIcon.setBackgroundResource(R.drawable.square_small_bg_geom);
+                Solved.setTextColor(Color.parseColor("#9A0D91"));
+                TeacherUserName.setTextColor(Color.parseColor("#9A0D91"));
+                constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_geom);
+                SolveNow.setTextColor(Color.parseColor("#9A0D91"));
+                SolveNow.setBackgroundResource(R.drawable.text_view_bg_geom);
+                Play.setBackgroundResource(R.drawable.play_geometry);
+                Pause.setBackgroundResource(R.drawable.pause_geom);
+                AudioPlayer.setBackgroundResource(R.drawable.text_view_bg_geom);
+                chronometer.setTextColor(Color.parseColor("#9A0D91"));
+
+            }else
+            if (Objects.equals(bundle.getString("STD"), "10th")&&Objects.equals(bundle.getString("Board"), "CBSE")){
+
+                SubjectTag.setText(bundle.getString("STD") + " " + bundle.getString("Board"));
+                SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_geog);
+                SubjectTag.setTextColor(Color.parseColor("#009F37"));
+                StudentUserName.setTextColor(Color.parseColor("#009F37"));
+                SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_geog);
+                SolvedIcon.setBackgroundResource(R.drawable.small_squar_bg_geog);
+                Solved.setTextColor(Color.parseColor("#009F37"));
+                TeacherUserName.setTextColor(Color.parseColor("#009F37"));
+                constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_geog);
+                SolveNow.setTextColor(Color.parseColor("#009F37"));
+                SolveNow.setBackgroundResource(R.drawable.text_view_bg_geog);
+                Play.setBackgroundResource(R.drawable.play_geog);
+                Pause.setBackgroundResource(R.drawable.pause_geog);
+                AudioPlayer.setBackgroundResource(R.drawable.text_view_bg_geom);
+                chronometer.setTextColor(Color.parseColor("#009F37"));
+
+            }else
+            if (Objects.equals(bundle.getString("STD"), "9th")&&Objects.equals(bundle.getString("Board"), "ICSE")){
+
+                SubjectTag.setText(bundle.getString("STD") + " " + bundle.getString("Board"));
+                SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_chem);
+                SubjectTag.setTextColor(Color.parseColor("#FF9B00"));
+                StudentUserName.setTextColor(Color.parseColor("#FF9B00"));
+                SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_chem);
+                SolvedIcon.setBackgroundResource(R.drawable.small_square_bg_chem);
+                Solved.setTextColor(Color.parseColor("#FF9B00"));
+                TeacherUserName.setTextColor(Color.parseColor("#FF9B00"));
+                constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_chem);
+                SolveNow.setTextColor(Color.parseColor("#FF9B00"));
+                SolveNow.setBackgroundResource(R.drawable.text_view_bg_chem);
+                Play.setBackgroundResource(R.drawable.play_chem);
+                Pause.setBackgroundResource(R.drawable.pause_chem);
+                AudioPlayer.setBackgroundResource(R.drawable.text_view_bg_chem);
+                chronometer.setTextColor(Color.parseColor("#FF9B00"));
+
+            }else
+            if (Objects.equals(bundle.getString("STD"), "10th")&&Objects.equals(bundle.getString("Board"), "ICSE")){
+
+                SubjectTag.setText(bundle.getString("STD") + " " + bundle.getString("Board"));
+                SubjectTag.setBackgroundResource(R.drawable.subject_button_bg_his);
+                SubjectTag.setTextColor(Color.parseColor("#813912"));
+                StudentUserName.setTextColor(Color.parseColor("#813912"));
+                SolvedIcon.setImageResource(R.drawable.ic_round_check_circle_24_his);
+                SolvedIcon.setBackgroundResource(R.drawable.small_squar_bg_his);
+                Solved.setTextColor(Color.parseColor("#813912"));
+                TeacherUserName.setTextColor(Color.parseColor("#813912"));
+                constraintLayout.setBackgroundResource(R.drawable.doubt_card_bg_his);
+                SolveNow.setTextColor(Color.parseColor("#813912"));
+                SolveNow.setBackgroundResource(R.drawable.text_view_bg_red);
+                Play.setBackgroundResource(R.drawable.play_his);
+                Pause.setBackgroundResource(R.drawable.pause_his);
+                AudioPlayer.setBackgroundResource(R.drawable.text_view_bg_his);
+                chronometer.setTextColor(Color.parseColor("#813912"));
+
+            }
+
+
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -382,6 +508,7 @@ public class DoubtDetails extends AppCompatActivity {
 
 
 
+
     }
 
     public void Initialisation(){
@@ -409,6 +536,8 @@ public class DoubtDetails extends AppCompatActivity {
         Play = findViewById(R.id.PlayPauseDD);
         Pause = findViewById(R.id.PauseDD);
         chronometer = findViewById(R.id.timerDD);
+        report = findViewById(R.id.report);
+        reportText = findViewById(R.id.reportText);
 
 
     }
@@ -490,4 +619,8 @@ public class DoubtDetails extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

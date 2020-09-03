@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission
         android:name="android.permission.MEDIA_CONTENT_CONTROL"
         tools:ignore="ProtectedPermissions" />
@@ -20,21 +22,23 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
+        android:fullBackupOnly="false"
         android:icon="@mipmap/ic_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_icon_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:windowSoftInputMode="adjustPan">
-
-
-        <activity android:name=".Home.Image"
-            android:theme="@style/imageView"
-            />
-
-
+        android:windowSoftInputMode="adjustPan"
+        tools:replace="android:allowBackup">
+        <activity android:name=".About.About"></activity>
+        <activity android:name=".Feedback.Feedback" />
+        <activity android:name=".Login.ResetPassword" />
+        <activity android:name=".Home.Suspended" />
+        <activity
+            android:name=".Home.Image"
+            android:theme="@style/imageView" />
         <activity
             android:name=".TeacherProfile.Settings"
             android:parentActivityName=".Home.Home" />
@@ -51,9 +55,9 @@
             android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".Home.Home"
-            android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTop"
-            android:theme="@style/home" />
+            android:theme="@style/home"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".Login.Login" />
         <activity
             android:name=".SplashScreen.SplashScreen"
@@ -65,6 +69,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

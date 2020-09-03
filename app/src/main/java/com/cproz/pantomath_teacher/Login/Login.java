@@ -5,7 +5,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -35,12 +39,23 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     ProgressBar progressBar;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
         Initialisation();
+
+
+        ForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //ForgetPasswordPopup forgetPasswordPopup = new ForgetPasswordPopup();
+                //forgetPasswordPopup.show(getSupportFragmentManager(), "awa");
+                startActivity(new Intent(Login.this, ResetPassword.class));
+            }
+        });
 
 
         progressBar.setVisibility(View.GONE);
@@ -75,6 +90,15 @@ public class Login extends AppCompatActivity {
                 validation();
             }
         });
+
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        assert connectivityManager != null;
+        Network networkInfo = connectivityManager.getActiveNetwork();
+        if (networkInfo == null){
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -134,6 +158,7 @@ public class Login extends AppCompatActivity {
     private void Authentication(String Email, String Password) {
 
         firebaseAuth.signInWithEmailAndPassword(Email, Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
@@ -144,7 +169,16 @@ public class Login extends AppCompatActivity {
                 else{
                     Login.setEnabled(true);
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();//toast for invalid entries;;
+
+                    ConnectivityManager connectivityManager = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                    assert connectivityManager != null;
+                    Network networkInfo = connectivityManager.getActiveNetwork();
+                    if (networkInfo == null){
+                        Toast.makeText(Login.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();//toast for invalid entries;;
+                    }
                 }
             }
         });
@@ -165,6 +199,9 @@ public class Login extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
     }
 }

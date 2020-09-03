@@ -85,7 +85,7 @@ public class TeacherProfileFragment extends Fragment {
     String decision;
     Uri mCropImageUri;
     FirebaseStorage firebaseStorage;
-    ProgressBar progressBar;
+
     String Status = "Solved";
 
     String Subject;
@@ -104,8 +104,8 @@ public class TeacherProfileFragment extends Fragment {
 
 
 
-        progressBar = root.findViewById(R.id.progressBarProfile);
-        progressBar.setVisibility(View.GONE);
+
+
 
         firebaseStorage = FirebaseStorage.getInstance();
 
@@ -123,7 +123,7 @@ public class TeacherProfileFragment extends Fragment {
                 BOARD = documentSnapshot.getString("Board");
                 CLASS = documentSnapshot.getString("STD");
                 Subject = documentSnapshot.getString("Subject");
-                UserName.setText(documentSnapshot.getString("Name"));
+                UserName.setText(toTitleCase(Objects.requireNonNull(documentSnapshot.getString("Name"))));
                 ProfileUrl = documentSnapshot.getString("profileURl");
 
 
@@ -134,9 +134,9 @@ public class TeacherProfileFragment extends Fragment {
                     Picasso.get().load(ProfileUrl).into(profilePicture);
                 }
 
-                Subjectx.setText(Subject);
+                Subjectx.setText(toTitleCase(Subject));
 
-                Decision("Solved");
+                Doubts("Solved");
 
 
 
@@ -149,7 +149,7 @@ public class TeacherProfileFragment extends Fragment {
 
 
                                 DoubtList2.clear();
-                                Decision("Solved");
+                                Doubts("Solved");
                                 solved.setEnabled(false);
                                 unsolved.setEnabled(false);
 
@@ -160,7 +160,7 @@ public class TeacherProfileFragment extends Fragment {
 
                                 Status = "Unsolved";
                                 DoubtList2.clear();
-                                Decision("Unsolved");
+                                Doubts("Unsolved");
                                 unsolved.setEnabled(false);
                                 solved.setEnabled(false);
 
@@ -176,15 +176,6 @@ public class TeacherProfileFragment extends Fragment {
             }
         });
 
-        profilePicture.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onClick(View v) {
-
-                onSelectImageClick(v);
-
-            }
-        });
 
 
         setting.setOnClickListener(new View.OnClickListener() {
@@ -208,7 +199,7 @@ public class TeacherProfileFragment extends Fragment {
     public void Initialisation(View root){
         toolbar = root.findViewById(R.id.StudentProfileToolBar);
         profilePicture = root.findViewById(R.id.ProfilePicture_profile);
-        editPhotoButt = root.findViewById(R.id.editProfilePicture_profile);
+
         recyclerView = root.findViewById(R.id.recyclerViewProfile);
         UserName = root.findViewById(R.id.UserNameProfile);
         Subjectx = root.findViewById(R.id.ClassAndBoard_Profile);
@@ -248,195 +239,80 @@ public class TeacherProfileFragment extends Fragment {
 
 
 
-    public void Decision(String Status){
+//    public void Decision(String Status){
+//
+//        if (BOARD.equals("Both")){
+//
+//            SSC = "SSC";
+//            CBSE = "CBSE";
+//
+//            if (CLASS.equals("Both")){
+//
+//                //Both board Both class
+//                DoubtList2.clear();
+//                //BothBoardBothClass(Status);
+//                class9 = "9th";
+//                class10 = "10th";
+//
+//            }
+//            else{
+//                //Both board 1 class
+//                DoubtList2.clear();
+//                BothBoardOneClass(Status);
+//            }
+//
+//        }
+//        else{
+//
+//            if (CLASS.equals("Both")){
+//
+//
+//                //1 board Both class
+//                DoubtList2.clear();
+//                OneBoardBothClass(Status);
+//
+//
+//                class9 = "9th";
+//                class10 = "10th";
+//
+//            }
+//            else{
+//                //1 board 1 class
+//                DoubtList2.clear();
+//                OneBoardOneClass(Status);
+//
+//            }
+//
+//        }
+//
+//
+//    }
 
-        if (BOARD.equals("Both")){
 
-            SSC = "SSC";
-            CBSE = "CBSE";
 
-            if (CLASS.equals("Both")){
 
-                //Both board Both class
-                DoubtList2.clear();
-                BothBoardBothClass(Status);
-                class9 = "9th";
-                class10 = "10th";
 
-            }
-            else{
-                //Both board 1 class
-                DoubtList2.clear();
-                BothBoardOneClass(Status);
-            }
 
-        }
-        else{
 
-            if (CLASS.equals("Both")){
 
 
-                //1 board Both class
-                DoubtList2.clear();
-                OneBoardBothClass(Status);
 
 
-                class9 = "9th";
-                class10 = "10th";
 
-            }
-            else{
-                //1 board 1 class
-                DoubtList2.clear();
-                OneBoardOneClass(Status);
 
-            }
 
-        }
 
 
-    }
 
 
 
 
-    public void onSelectImageClick(View view) {
-        //CropImage.startPickImageActivity(this);
-        CropImage.activity().start((Activity) Objects.requireNonNull(getContext()));
 
 
-    }
 
 
 
-
-
-
-    @Override
-    @SuppressLint({"NewApi", "SetTextI18n"})
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        // handle result of pick image chooser
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE && resultCode == RESULT_OK) {
-            Uri imageUri = CropImage.getPickImageResultUri(Objects.requireNonNull(getActivity()), data);
-
-            // For API >= 23 we need to check specifically that we have permissions to read external storage.
-            if (CropImage.isReadExternalStoragePermissionsRequired(Objects.requireNonNull(getActivity()), imageUri)) {
-                // request permissions and handle the result in onRequestPermissionsResult()
-                mCropImageUri = imageUri;
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 0);
-            } else {
-                // no permissions required or already grunted, can start crop image activity
-                startCropImageActivity(imageUri);
-            }
-        }
-
-        // handle result of CropImageActivity
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-                mCropImageUri = result.getUri();
-
-
-                profilePicture.setImageURI(mCropImageUri);
-                UpdateProfilePic(mCropImageUri);
-                //SelectPhotoText.setText("Change Photo");
-
-
-
-
-
-
-
-
-
-
-
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Toast.makeText(getContext(), "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
-            }
-
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-
-
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (mCropImageUri != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            // required permissions granted, start crop image activity
-            startCropImageActivity(mCropImageUri);
-        }
-        else {
-            Toast.makeText(getContext(), "Cancelling, required permissions are not granted", Toast.LENGTH_LONG).show();
-        }
-    }
-
-
-    private void startCropImageActivity(Uri imageUri) {
-        CropImage.activity(imageUri)
-                .setGuidelines(CropImageView.Guidelines.ON)
-                .setMultiTouchEnabled(true)
-                .start((Activity) Objects.requireNonNull(getContext()));
-    }
-
-
-
-
-
-
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public void UpdateProfilePic( Uri mCropImageUri){
-
-        StorageReference storageReference = firebaseStorage.getReference();
-
-        final StorageReference reference = storageReference.child("ProfilePictures/" + email + "/profile.jpg");
-
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setProgress(100, true);
-
-
-
-        reference.putFile(mCropImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        String ProfileURL = uri.toString();
-
-                        firebaseFirestore.collection("Users/Teachers/Teacherinfo/"  ).document( email).update("profileURL", ProfileURL).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-
-                                Toast.makeText(getContext(), "Profile Picture Updated", Toast.LENGTH_SHORT).show();
-                                progressBar.setVisibility(View.GONE);
-                            }
-                        })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-
-                                        System.out.println("Profile Picture was unable to update");
-                                        progressBar.setVisibility(View.GONE);
-
-                                    }
-                                });
-                    }
-                });
-            }
-        });
-
-    }
-
-
-
-
-    public void BothBoardBothClass(String Status) {
+    public void Doubts(String Status) {
 
 
         db.collection("Doubts").whereEqualTo("Subject", Subject).whereEqualTo("Status", Status).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -447,16 +323,295 @@ public class TeacherProfileFragment extends Fragment {
 
                     //Date date = new Date();
 
+                    String email = user.getEmail();
 
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+                    if (Objects.equals(querySnapshot.getString("TeacherEmail"), email) && !Objects.equals(querySnapshot.getString("Status"), "Reported")){
 
-                    DoubtList2.add(homeDoubtData);
+
+
+
+
+                        if (BOARD.equals("SSC, CBSE & ICSE") && CLASS.equals("9th & 10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th") || Objects.equals(querySnapshot.getString("STD"), "10th")) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC")||Objects.equals(querySnapshot.getString("Board"), "CBSE")||
+                                            Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if(BOARD.equals("SSC & CBSE") && CLASS.equals("9th & 10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th") || Objects.equals(querySnapshot.getString("STD"), "10th") )&&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC")||Objects.equals(querySnapshot.getString("Board"), "CBSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("CBSE & ICSE") && CLASS.equals("9th & 10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th") || Objects.equals(querySnapshot.getString("STD"), "10th")) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "CBSE")||Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("SSC & ICSE") && CLASS.equals("9th & 10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th") || Objects.equals(querySnapshot.getString("STD"), "10th")) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC")||Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("SSC") && CLASS.equals("9th & 10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th") || Objects.equals(querySnapshot.getString("STD"), "10th")) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("CBSE") && CLASS.equals("9th & 10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th") || Objects.equals(querySnapshot.getString("STD"), "10th")) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "CBSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("ICSE") && CLASS.equals("9th & 10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th") || Objects.equals(querySnapshot.getString("STD"), "10th")) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else
+                        if (BOARD.equals("SSC, CBSE & ICSE") && CLASS.equals("9th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th"))  &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC")||Objects.equals(querySnapshot.getString("Board"), "CBSE")||
+                                            Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if(BOARD.equals("SSC & CBSE") && CLASS.equals("9th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th")) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC")||Objects.equals(querySnapshot.getString("Board"), "CBSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("CBSE & ICSE") && CLASS.equals("9th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th") ) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "CBSE")||Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("SSC & ICSE") && CLASS.equals("9th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th")) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC")||Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("SSC") && CLASS.equals("9th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th"))&&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("CBSE") && CLASS.equals("9th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th"))&&
+                                    (Objects.equals(querySnapshot.getString("Board"), "CBSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("ICSE") && CLASS.equals("9th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "9th"))&&
+                                    (Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else
+                        if (BOARD.equals("SSC, CBSE & ICSE") && CLASS.equals("10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "10th"))  &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC")||Objects.equals(querySnapshot.getString("Board"), "CBSE")||
+                                            Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if(BOARD.equals("SSC & CBSE") && CLASS.equals("10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "10th")) &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC")||Objects.equals(querySnapshot.getString("Board"), "CBSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("CBSE & ICSE") && CLASS.equals("10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "10th"))  &&
+                                    (Objects.equals(querySnapshot.getString("Board"), "CBSE")||Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("SSC & ICSE") && CLASS.equals("10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "10th") )&&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC")||Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("SSC") && CLASS.equals("10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "10th"))&&
+                                    (Objects.equals(querySnapshot.getString("Board"), "SSC"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("CBSE") && CLASS.equals("10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "10th"))&&
+                                    (Objects.equals(querySnapshot.getString("Board"), "CBSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }else if (BOARD.equals("ICSE") && CLASS.equals("10th")){
+                            if ((Objects.equals(querySnapshot.getString("STD"), "10th"))&&
+                                    (Objects.equals(querySnapshot.getString("Board"), "ICSE"))){
+                                homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+                                        querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+                                        querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+                                        querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+                                        querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+                                        querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+                                        , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+
+                                DoubtList2.add(homeDoubtData);
+                            }
+                        }
+                    }
+
 
 
                     profileDoubtsAdapter = new ProfileDoubtsAdapter(getContext(), DoubtList2);
@@ -486,143 +641,148 @@ public class TeacherProfileFragment extends Fragment {
 
 
 
-    public void BothBoardOneClass(String Status) {
-
-
-        db.collection("Doubts").whereEqualTo("Subject", Subject).whereEqualTo("STD", CLASS).whereEqualTo("Status", Status).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
-
-
-                    //Date date = new Date();
-
-
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
-
-                    DoubtList2.add(homeDoubtData);
-
-
-                    profileDoubtsAdapter = new ProfileDoubtsAdapter(getContext(), DoubtList2);
-
-
-                    recyclerView.setItemViewCacheSize(40);
-
-                    recyclerView.setAdapter(profileDoubtsAdapter);
-
-
-                }
-                if (DoubtList2.isEmpty()){
-                    recyclerView.setAlpha(0);
-                    noResults.setVisibility(View.VISIBLE);
-                }else{
-                    recyclerView.setAlpha(1);
-                    noResults.setVisibility(View.GONE);
-                }
-                solved.setEnabled(true);
-                unsolved.setEnabled(true);
-            }
-        });
-    }
-
-
-
-    public void OneBoardBothClass(String Status) {
-
-
-        db.collection("Doubts").whereEqualTo("Subject", Subject).whereEqualTo("Board", BOARD).whereEqualTo("Status", Status).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
-
-
-                    //Date date = new Date();
-
-
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
-
-                    DoubtList2.add(homeDoubtData);
-
-
-                    profileDoubtsAdapter = new ProfileDoubtsAdapter(getContext(), DoubtList2);
-
-
-                    recyclerView.setItemViewCacheSize(40);
-
-                    recyclerView.setAdapter(profileDoubtsAdapter);
-
-
-                }
-                if (DoubtList2.isEmpty()){
-                    recyclerView.setAlpha(0);
-                    noResults.setVisibility(View.VISIBLE);
-                }else{
-                    recyclerView.setAlpha(1);
-                    noResults.setVisibility(View.GONE);
-                }
-                solved.setEnabled(true);
-                unsolved.setEnabled(true);
-            }
-        });
-    }
-
-
-    public void OneBoardOneClass(String Status) {
-
-
-        db.collection("Doubts").whereEqualTo("Subject", Subject).whereEqualTo("Board", BOARD).whereEqualTo("STD", CLASS).whereEqualTo("Status", Status).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
-
-
-                    //Date date = new Date();
-
-
-                    homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
-                            querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
-                            querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
-                            querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
-                            querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
-                            querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
-                            , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
-
-                    DoubtList2.add(homeDoubtData);
-
-
-                    profileDoubtsAdapter = new ProfileDoubtsAdapter(getContext(), DoubtList2);
-
-
-                    recyclerView.setItemViewCacheSize(40);
-
-                    recyclerView.setAdapter(profileDoubtsAdapter);
-
-
-                }
-                if (DoubtList2.isEmpty()){
-                    recyclerView.setAlpha(0);
-                    noResults.setVisibility(View.VISIBLE);
-                }else{
-                    recyclerView.setAlpha(1);
-                    noResults.setVisibility(View.GONE);
-                }
-                solved.setEnabled(true);
-                unsolved.setEnabled(true);
-            }
-        });
-    }
+//    public void BothBoardOneClass(String Status) {
+//
+//
+//        db.collection("Doubts").whereEqualTo("Subject", Subject).whereEqualTo("STD", CLASS).whereEqualTo("Status", Status).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
+//
+//
+//                    //Date date = new Date();
+//
+//                    String email = user.getEmail();
+//                    if (Objects.equals(querySnapshot.getString("TeacherEmail"), email)){
+//                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+//                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+//                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+//                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+//                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+//                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+//                                , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+//
+//                        DoubtList2.add(homeDoubtData);
+//                    }
+//
+//
+//                    profileDoubtsAdapter = new ProfileDoubtsAdapter(getContext(), DoubtList2);
+//
+//
+//                    recyclerView.setItemViewCacheSize(40);
+//
+//                    recyclerView.setAdapter(profileDoubtsAdapter);
+//
+//
+//                }
+//                if (DoubtList2.isEmpty()){
+//                    recyclerView.setAlpha(0);
+//                    noResults.setVisibility(View.VISIBLE);
+//                }else{
+//                    recyclerView.setAlpha(1);
+//                    noResults.setVisibility(View.GONE);
+//                }
+//                solved.setEnabled(true);
+//                unsolved.setEnabled(true);
+//            }
+//        });
+//    }
+//
+//
+//
+//    public void OneBoardBothClass(String Status) {
+//
+//
+//        db.collection("Doubts").whereEqualTo("Subject", Subject).whereEqualTo("Board", BOARD).whereEqualTo("Status", Status).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
+//
+//
+//                    //Date date = new Date();
+//
+//                    String email = user.getEmail();
+//                    if (Objects.equals(querySnapshot.getString("TeacherEmail"), email)){
+//                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+//                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+//                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+//                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+//                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+//                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+//                                , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+//
+//                        DoubtList2.add(homeDoubtData);
+//                    }
+//
+//                    profileDoubtsAdapter = new ProfileDoubtsAdapter(getContext(), DoubtList2);
+//
+//
+//                    recyclerView.setItemViewCacheSize(40);
+//
+//                    recyclerView.setAdapter(profileDoubtsAdapter);
+//
+//
+//                }
+//                if (DoubtList2.isEmpty()){
+//                    recyclerView.setAlpha(0);
+//                    noResults.setVisibility(View.VISIBLE);
+//                }else{
+//                    recyclerView.setAlpha(1);
+//                    noResults.setVisibility(View.GONE);
+//                }
+//                solved.setEnabled(true);
+//                unsolved.setEnabled(true);
+//            }
+//        });
+//    }
+//
+//
+//    public void OneBoardOneClass(String Status) {
+//
+//
+//        db.collection("Doubts").whereEqualTo("Subject", Subject).whereEqualTo("Board", BOARD).whereEqualTo("STD", CLASS).whereEqualTo("Status", Status).orderBy("DateTime", Query.Direction.DESCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                for (QueryDocumentSnapshot querySnapshot : Objects.requireNonNull(task.getResult())) {
+//
+//
+//                    //Date date = new Date();
+//
+//                    String email = user.getEmail();
+//                    if (Objects.equals(querySnapshot.getString("TeacherEmail"), email)){
+//                        homeDoubtData = new HomeDoubtData(querySnapshot.getString("AnsPhotoUrl1"), querySnapshot.getString("AnsPhotoUrl2"), querySnapshot.getString("AnsText"),
+//                                querySnapshot.getString("AudioUrl"), querySnapshot.getString("Board"), querySnapshot.getString("Chapter"),
+//                                querySnapshot.getString("Email"), querySnapshot.getString("FileUrl"), querySnapshot.getString("Link"),
+//                                querySnapshot.getString("Name"), querySnapshot.getString("Photo1url"), querySnapshot.getString("Photo2url"),
+//                                querySnapshot.getString("ProfileImageURL"), querySnapshot.getString("QText"), querySnapshot.getString("STD"),
+//                                querySnapshot.getString("Status"), querySnapshot.getString("Subject"), querySnapshot.getString("Teacher"), querySnapshot.getString("Uid")
+//                                , querySnapshot.getDate("DateTime"), querySnapshot.getString("TeacherImageUrl"),querySnapshot.getString("TeacherEmail"));
+//
+//                        DoubtList2.add(homeDoubtData);
+//                    }
+//
+//
+//                    profileDoubtsAdapter = new ProfileDoubtsAdapter(getContext(), DoubtList2);
+//
+//
+//                    recyclerView.setItemViewCacheSize(40);
+//
+//                    recyclerView.setAdapter(profileDoubtsAdapter);
+//
+//
+//                }
+//                if (DoubtList2.isEmpty()){
+//                    recyclerView.setAlpha(0);
+//                    noResults.setVisibility(View.VISIBLE);
+//                }else{
+//                    recyclerView.setAlpha(1);
+//                    noResults.setVisibility(View.GONE);
+//                }
+//                solved.setEnabled(true);
+//                unsolved.setEnabled(true);
+//            }
+//        });
+//    }
 
 
 

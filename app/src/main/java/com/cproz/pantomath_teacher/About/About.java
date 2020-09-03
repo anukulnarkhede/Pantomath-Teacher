@@ -1,4 +1,4 @@
-package com.cproz.pantomath_teacher.TeacherProfile;
+package com.cproz.pantomath_teacher.About;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,18 +14,16 @@ import com.cproz.pantomath_teacher.R;
 
 import java.util.Objects;
 
-public class Settings extends AppCompatActivity {
+public class About extends AppCompatActivity {
 
-    Button  Feedback, Help, About, Logout;
+    Button TermsButt, PrivacyPolicyButt;
     Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings);
-
-
-        Initialisation();
+        setContentView(R.layout.about);
+        Initialization();
 
 
         setSupportActionBar(toolbar);
@@ -36,32 +34,35 @@ public class Settings extends AppCompatActivity {
         Objects.requireNonNull(toolbar.getNavigationIcon()).setColorFilter(getResources().getColor(R.color.blue), PorterDuff.Mode.SRC_ATOP);
 
 
-        Logout.setOnClickListener(new View.OnClickListener() {
+        PrivacyPolicyButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogoutPopUp log = new LogoutPopUp();
-                log.show(getSupportFragmentManager(), "logout");
-            }
-        });
-
-
-        Help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse("https://www.cproz.net");
+                Uri uri = Uri.parse("https://www.cproz.net/d-solveprivacypolicy");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
         });
 
+        TermsButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("https://www.cproz.net/d-solvetermsofservice");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
+
     }
 
-    public void Initialisation(){
 
-        Feedback = findViewById(R.id.feedback);
-        Help = findViewById(R.id.Help);
-        About = findViewById(R.id.about);
-        Logout = findViewById(R.id.logout);
-        toolbar = findViewById(R.id.SettingsToolBar);
+    private void Initialization() {
+        TermsButt = findViewById(R.id.TermsButt);
+        PrivacyPolicyButt  = findViewById(R.id.PrivacyPolicyButt);
+        toolbar = findViewById(R.id.AboutToolBar);
     }
 }

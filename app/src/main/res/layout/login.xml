@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login.Login">
+    tools:context=".Login.Login"
+
+    android:background="#fff"
+    >
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pantomath\nTeacher"
+        android:text="D-Solve Teacher"
         android:textAlignment="center"
         android:textSize="38sp"
         android:fontFamily="sans-serif-medium"
@@ -26,22 +29,22 @@
         android:id="@+id/EmailText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:imeOptions="actionNext"
-
         android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="40dp"
+
         android:background="@drawable/text_view_bg"
-        android:layout_marginTop="380dp"
-        android:inputType="textEmailAddress"
+        android:ems="10"
         android:hint="Email"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
         android:padding="16dp"
         android:textColor="@color/black"
         android:textColorHint="@color/grey_muted_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="HardcodedText" />
 
     <EditText
         android:id="@+id/passwordLogin"
@@ -84,7 +87,7 @@
         android:id="@+id/forgetPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forget Password?"
+        android:text="Forgot Password?"
         android:textSize="12sp"
         android:layout_marginTop="5dp"
         android:padding="6dp"

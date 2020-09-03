@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,51 +11,59 @@
 
 
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:translationZ="2dp"
+
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/DoubtDetailsToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="2dp"
+            android:translationZ="2dp"
+            android:background="#fff">
+
+            <TextView
+
+                android:id="@+id/toolbar_DoubtsDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="sans-serif-medium"
+                android:text="Doubt"
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appBarLayout">
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="500dp">
 
 
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="2dp"
-            android:translationZ="2dp"
 
-            android:background="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/DoubtDetailsToolBar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:elevation="2dp"
-                android:translationZ="2dp"
-                android:background="#fff">
-
-                <TextView
-
-                    android:id="@+id/toolbar_DoubtsDetails"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Doubt"
-                    android:textColor="@color/blue"
-                    android:textSize="20sp"
-                    tools:ignore="HardcodedText" />
-
-            </androidx.appcompat.widget.Toolbar>
-
-
-        </com.google.android.material.appbar.AppBarLayout>
 
 
         <View
@@ -63,7 +71,7 @@
             android:layout_height="0.5dp"
             android:visibility="gone"
             android:background="#999999"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"/>
+            app:layout_constraintTop_toBottomOf="parent"/>
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -89,7 +97,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@+id/ProfilePictureDoubtsDetails"
-            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -123,7 +131,7 @@
             android:layout_marginBottom="16dp"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
 
 
@@ -190,14 +198,45 @@
             android:id="@+id/solvedTextDD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8.8dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="sans-serif-medium"
             android:text="Solved"
             android:textColor="@color/red"
-            android:textSize="13.2sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/solvedDD"
             app:layout_constraintStart_toEndOf="@+id/solvedDD"
             app:layout_constraintTop_toTopOf="@+id/solvedDD"
+            tools:ignore="HardcodedText" />
+
+
+        <ImageView
+            android:id="@+id/report"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+
+
+            android:layout_marginTop="16dp"
+            android:background="@drawable/square_small_bg_alg"
+            android:padding="6dp"
+            android:layout_marginEnd="16dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/QuestionTextDD"
+            app:srcCompat="@drawable/ic_outline_report_24" />
+
+        <TextView
+            android:id="@+id/reportText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif"
+            android:text="Tap to report"
+            android:textColor="#999999"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/report"
+            app:layout_constraintEnd_toStartOf="@+id/report"
+            app:layout_constraintTop_toTopOf="@+id/report"
             tools:ignore="HardcodedText" />
 
 
@@ -427,5 +466,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </ScrollView>
 
-</ScrollView>
+
+</RelativeLayout>

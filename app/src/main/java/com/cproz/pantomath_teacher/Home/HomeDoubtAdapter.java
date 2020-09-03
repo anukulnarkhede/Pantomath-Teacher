@@ -81,6 +81,8 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
         holder.DateText.setText(datex);
 
 
+        holder.solvedText.setVisibility(View.GONE);
+        holder.solved.setVisibility(View.GONE);
 
 
 
@@ -254,6 +256,60 @@ public class HomeDoubtAdapter extends RecyclerView.Adapter<HomeDoubtViewHolder> 
                 holder.solvedText.setText("Solved");
                 holder.solvedText.setTextColor(Color.parseColor("#009F37"));
                 holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_geog);
+                holder.solved.setBackgroundResource(R.drawable.small_squar_bg_geog);
+            }
+
+        }else if (DoubtList.get(position).getSTD().equals("9th")&&DoubtList.get(position).getBoard().equals("ICSE")){
+            holder.CardBg.setBackgroundResource(R.drawable.doubt_card_bg_chem);
+            holder.subjectTag.setText(DoubtList.get(position).getSTD() + " " + DoubtList.get(position).getBoard());
+            holder.UserName.setTextColor(Color.parseColor("#FF9B00"));
+            holder.subjectTag.setBackgroundResource(R.drawable.subject_button_bg_chem);
+            holder.TapToSolve.setBackgroundResource(R.drawable.tap_to_solve_chem);
+            holder.TapToSolve.setTextColor(Color.parseColor("#FF9B00"));
+            holder.subjectTag.setTextColor(Color.parseColor("#FF9B00"));
+            holder.record.setBackgroundResource(R.drawable.small_square_bg_chem);
+            holder.record.setImageResource(R.drawable.record_chem);
+            if (DoubtList.get(position).getStatus().equals("Unsolved")){
+                holder.solved.setVisibility(View.GONE);
+                holder.solvedText.setVisibility(View.GONE);
+                holder.TapToSolve.setVisibility(View.VISIBLE);
+
+            }
+            else if (DoubtList.get(position).getStatus().equals("Solved")){
+                holder.solved.setVisibility(View.VISIBLE);
+                holder.solvedText.setVisibility(View.VISIBLE);
+                holder.TapToSolve.setVisibility(View.GONE);
+                holder.solvedText.setText("Solved");
+                holder.solvedText.setTextColor(Color.parseColor("#FF9B00"));
+                holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_chem);
+                holder.solved.setBackgroundResource(R.drawable.small_square_bg_chem);
+            }
+
+
+        }else if (DoubtList.get(position).getSTD().equals("10th")&&DoubtList.get(position).getBoard().equals("ICSE")){
+
+            holder.CardBg.setBackgroundResource(R.drawable.doubt_card_bg_his);
+            holder.subjectTag.setText(DoubtList.get(position).getSTD() + " " + DoubtList.get(position).getBoard());
+            holder.UserName.setTextColor(Color.parseColor("#813912"));
+            holder.subjectTag.setTextColor(Color.parseColor("#813912"));
+            holder.TapToSolve.setBackgroundResource(R.drawable.tap_to_solve_his);
+            holder.TapToSolve.setTextColor(Color.parseColor("#813912"));
+            holder.subjectTag.setBackgroundResource(R.drawable.subject_button_bg_his);
+            holder.record.setBackgroundResource(R.drawable.small_squar_bg_his);
+            holder.record.setImageResource(R.drawable.record_his);
+            if (DoubtList.get(position).getStatus().equals("Unsolved")){
+                holder.solved.setVisibility(View.GONE);
+                holder.solvedText.setVisibility(View.GONE);
+                holder.TapToSolve.setVisibility(View.VISIBLE);
+
+            }
+            else if (DoubtList.get(position).getStatus().equals("Solved")){
+                holder.solved.setVisibility(View.VISIBLE);
+                holder.solvedText.setVisibility(View.VISIBLE);
+                holder.TapToSolve.setVisibility(View.GONE);
+                holder.solvedText.setText("Solved");
+                holder.solvedText.setTextColor(Color.parseColor("#813912"));
+                holder.solved.setImageResource(R.drawable.ic_round_check_circle_24_his);
                 holder.solved.setBackgroundResource(R.drawable.small_squar_bg_geog);
             }
 

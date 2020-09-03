@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Feedback.Feedback"
+    android:background="#fff"
+    >
+
+    <Button
+        android:elevation="4dp"
+        android:id="@+id/AddFeedback"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="16dp"
+        android:background="@drawable/confirm_doubt"
+
+        android:stateListAnimator="@null"
+        android:layout_marginBottom="16dp"
+        android:text="Add Feedback"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:fontFamily="sans-serif"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="#fff"
+        android:elevation="2dp"
+        android:translationZ="2dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/FeedbackToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+            android:background="#fff">
+
+            <TextView
+
+                android:id="@+id/toolbar_titleUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:fontFamily="sans-serif-medium"
+                android:text="Feedback"
+
+                android:textColor="@color/blue"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff">
+
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="sans-serif"
+                android:textSize="16sp"
+                android:text="Feedback for our D-Solve Team"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="HardcodedText" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/UploadImageCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/doubt_card_bg_physics"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+
+                <com.jackandphantom.circularimageview.RoundedImage
+                    android:id="@+id/FeedbackImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/image_view_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:rounded_radius="20" />
+
+                <EditText
+                    android:id="@+id/FeedbackText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="16dp"
+
+                    android:background="#00FFFFFF"
+                    android:ems="10"
+                    android:hint="Your message:"
+                    android:inputType="textMultiLine"
+                    android:textColor="#121212"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/FeedbackImage"
+                    tools:ignore="HardcodedText" />
+
+                <Button
+                    android:id="@+id/FeedbackImageCancle"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:alpha="0.6"
+                    android:background="@drawable/ic_rounded_cross"
+                    app:layout_constraintBottom_toBottomOf="@+id/FeedbackImage"
+                    app:layout_constraintEnd_toEndOf="@+id/FeedbackImage"
+                    app:layout_constraintHorizontal_bias="0.963"
+                    app:layout_constraintStart_toStartOf="@+id/FeedbackImage"
+                    app:layout_constraintTop_toTopOf="@+id/FeedbackImage"
+                    app:layout_constraintVertical_bias="0.054" />
+
+                <TextView
+                    android:id="@+id/addPhoto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add a Photo"
+                    app:layout_constraintBottom_toBottomOf="@+id/FeedbackImage"
+                    app:layout_constraintEnd_toEndOf="@+id/FeedbackImage"
+                    app:layout_constraintStart_toStartOf="@+id/FeedbackImage"
+                    app:layout_constraintTop_toTopOf="@+id/FeedbackImage"
+                    tools:ignore="HardcodedText" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <ProgressBar
+                android:id="@+id/progressBarFeedback"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/UploadImageCard"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

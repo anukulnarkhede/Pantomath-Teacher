@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,8 +28,10 @@ import com.bumptech.glide.request.transition.Transition;
 import com.cproz.pantomath_teacher.Notifications.NotificationsFragment;
 import com.cproz.pantomath_teacher.R;
 import com.cproz.pantomath_teacher.TeacherProfile.TeacherProfileFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,12 +39,17 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Home extends AppCompatActivity {
 
     FrameLayout fragmentContainer;
     BottomNavigationView bottomNav;
+    
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
 
 
     final Fragment fragment1 = new HomeFragment();
@@ -51,6 +59,13 @@ public class Home extends AppCompatActivity {
     Fragment active = fragment1;
 
 
+    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
+    String email = user != null ? user.getEmail() : null;
+    private DocumentReference ref = firebaseFirestore.collection("Users/Teachers/Teacherinfo/" ).document(String.valueOf(email));
+    String User;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +73,28 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.home);
 
         initialisation();
-
-
-
-
         bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+
+        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                if (Objects.equals(documentSnapshot.getString("User"), "Suspended")){
+
+                    System.out.println(documentSnapshot.getString("User"));
+
+                    Intent intent = new Intent(Home.this, Suspended.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+
+
+
 
 
 
@@ -71,7 +103,20 @@ public class Home extends AppCompatActivity {
         fm.beginTransaction().add(R.id.fragment_container,fragment1, "1").commit();
 
 
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = firebaseAuth.getCurrentUser();
+        assert user != null;
+        String email = user.getEmail();
 
+        Date date = new Date();
+
+        assert email != null;
+        firebaseFirestore.collection("Users/Teachers/Teacherinfo").document(email).update("OnlineTime",date ).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                System.out.println("OnlineTime Time updated");
+            }
+        });
 
 
         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();

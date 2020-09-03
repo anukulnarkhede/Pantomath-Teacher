@@ -6,10 +6,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
 
 
     >
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,10 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/doubt_card_bg_physics"
 
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,11 +42,11 @@
             android:id="@+id/solvedTextNotification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
+            android:layout_marginStart="8dp"
+            android:fontFamily="sans-serif-medium"
             android:text="Solved"
             android:textColor="@color/blue"
             android:textSize="14sp"
-            android:layout_marginStart="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/solvedIconNotifications"
             app:layout_constraintStart_toEndOf="@+id/solvedIconNotifications"
             app:layout_constraintTop_toTopOf="@+id/solvedIconNotifications"
@@ -66,7 +64,6 @@
             android:textAllCaps="false"
             android:textColor="@color/blue"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/timeTextNotification"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/NewDoubtTextNotification"
             tools:ignore="HardcodedText" />
@@ -94,6 +91,7 @@
             android:layout_marginStart="8dp"
             android:fontFamily="sans-serif"
             android:text="2 min ago"
+            android:layout_marginBottom="16dp"
             android:textColor="#999999"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/profilePicStu"
@@ -107,7 +105,6 @@
             android:layout_height="38dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/personal_info"
-            app:layout_constraintBottom_toBottomOf="@+id/timeTextNotification"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/NewDoubtTextNotification" />
 

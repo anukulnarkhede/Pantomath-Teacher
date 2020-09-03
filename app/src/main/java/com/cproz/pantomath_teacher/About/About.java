@@ -3,13 +3,16 @@ package com.cproz.pantomath_teacher.About;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.cproz.pantomath_teacher.BuildConfig;
 import com.cproz.pantomath_teacher.R;
 
 import java.util.Objects;
@@ -19,6 +22,9 @@ public class About extends AppCompatActivity {
     Button TermsButt, PrivacyPolicyButt;
     Toolbar toolbar;
 
+    TextView buildNumberAct;
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +58,7 @@ public class About extends AppCompatActivity {
             }
         });
 
+        buildNumberAct.setText(BuildConfig.VERSION_NAME + " - Beta");
 
 
 
@@ -64,5 +71,6 @@ public class About extends AppCompatActivity {
         TermsButt = findViewById(R.id.TermsButt);
         PrivacyPolicyButt  = findViewById(R.id.PrivacyPolicyButt);
         toolbar = findViewById(R.id.AboutToolBar);
+        buildNumberAct = findViewById(R.id.buildNumberAct);
     }
 }

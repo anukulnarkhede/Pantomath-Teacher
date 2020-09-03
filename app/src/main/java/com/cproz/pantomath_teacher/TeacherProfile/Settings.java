@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.cproz.pantomath_teacher.About.About;
 import com.cproz.pantomath_teacher.R;
 
 import java.util.Objects;
@@ -51,6 +52,13 @@ public class Settings extends AppCompatActivity {
                 Uri uri = Uri.parse("https://www.cproz.net");
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
+            }
+        });
+
+        About.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Settings.this, com.cproz.pantomath_teacher.About.About.class));
             }
         });
 
